@@ -10,8 +10,12 @@
             </h1>
 
             <p>
-                {{ $post->excerpt }}
+                <a href="#">{{ $post->category->name }}</a>                
             </p>
+
+            <div>
+                {{ $post->excerpt }}
+            </div>
 
         </article>
     @endforeach
