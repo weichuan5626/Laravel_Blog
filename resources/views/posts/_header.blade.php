@@ -6,7 +6,7 @@
     <div class="space-y-2 lg:space-y-0 lg:space-x-4 mt-4">
         <!--  Category -->
         <div class="relative lg:inline-flex bg-gray-100 rounded-xl">
-            <x-category-drop-down />
+            <x-category-drop-down/>
         </div>
 
         <!-- Other Filters -->
@@ -36,6 +36,9 @@
             <form method="GET" action="/">
                 @if (request('category'))
                     <input type="hidden" name="category" value="{{ request('category') }}">
+                @endif
+                @if (request('author'))
+                    <input type="hidden" name="author" value="{{ request('author') }}">
                 @endif
                 
                 <input type="text" name="search" placeholder="Find something"
