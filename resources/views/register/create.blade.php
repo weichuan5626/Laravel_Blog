@@ -17,8 +17,12 @@
                            type="text"
                            id="name"
                            name="name"
-                           value=""
+                           value="{{ old('name') }}"
                            required>
+
+                    @error('name')
+                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>                        
+                    @enderror
                 </div>
 
                 <div class="mb-6">
@@ -30,8 +34,12 @@
                            type="text"
                            id="username"
                            name="username"
-                           value=""
+                           value="{{ old('username') }}"
                            required>
+                    
+                    @error('username')
+                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>                        
+                    @enderror
                 </div>
 
                 <div class="mb-6">
@@ -43,8 +51,11 @@
                            type="email"
                            id="email"
                            name="email"
-                           value=""
+                           value="{{ old('email') }}"
                            required>
+                    @error('email')
+                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>                        
+                    @enderror
                 </div>
     
                 <div class="mb-6">
@@ -56,8 +67,11 @@
                            type="password"
                            id="password"
                            name="password"
-                           value=""
+                           value="{{ old('password') }}"
                            required>
+                    @error('password')
+                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>                        
+                    @enderror
                 </div>
                 
                 <div class="mb-6">
@@ -66,6 +80,14 @@
                     </button>
                 </div>
             </form>
+
+            @if ($errors->any())
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li class="text-red-500 text-xs">{{ $error }}</li>
+                    @endforeach
+                </ul>                
+            @endif
 
             
         </main>        
