@@ -29,6 +29,14 @@ Route::middleware(['guest'])->group(function () {
     Route::get('register', [RegisterController::class, 'create']);
     Route::post('register',[RegisterController::class, 'store']);
 });
+
+Route::middleware(['guest'])->group(function () {
+    Route::get('login', [SessionController::class, 'create']);
+    Route::post('login', [SessionController::class, 'store']);
+});
+
+
+
 Route::post('logout', [SessionController::class, 'destory']);
 
 
