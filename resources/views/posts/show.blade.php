@@ -53,38 +53,8 @@
                 </div>
 
                 <section class="col-span-8 col-start-5 mt-10 space-y-6">
-                    @auth
-                        <x-panel>                        
-                            <form action="/posts/{{ $post->slug }}/comments" method="post">
-                                @csrf
-        
-                                <header class="flex">
-                                    <img src="https://i.pravatar.cc/60?u={{ auth()->id() }}" alt="" width="60" height="60" class="rounded-xl">
-        
-                                    <h2>Want to participate?</h2>
-                                </header>
-        
-                                <div class="mt-6">
-                                    <textarea name="body" class="w-full text-sm focus:outline-none focus:ring border border-gray-100 p-4" cols="30" rows="10" placeholder="Quick, thing of something to say!"></textarea>
-                                </div>
-        
-                                <div class="flex justify-end mt-6">
-                                    <button type="submit" class="bg-blue-500 text-white uppercase rounded-2xl font-semibold text-xs py-2 px-10 hover:bg-blue-600">Post</button>
-                                </div>
-                            </form>
-                        </x-panel>
-                    @else
-                        <x-panel class="bg-gray-50">
-                            <p>
-                                <a href="/register" class="text-blue-500 hover:underline">Register</a> or <a href="/login" class="text-blue-500 hover:underline">Log in</a> to leave a comment.
-                            </p>
-                        </x-panel>
-                                                  
-                    @endauth
-                                        
-                </section>
+                    @include('posts._add-comment-form')
 
-                <section class="col-span-8 col-start-5 mt-10 space-y-6">
                     @foreach ($post->comments as $comment)
                         <x-post-comment :comment="$comment"></x-post-comment>
                     @endforeach
