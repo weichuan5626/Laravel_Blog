@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PostCommentsController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionController;
@@ -31,9 +32,11 @@ Route::middleware(['guest'])->group(function () {
 });
 
 Route::middleware(['guest'])->group(function () {
-    Route::get('login', [SessionController::class, 'create']);
+    Route::get('login', [SessionController::class, 'create'])->name('login');
     Route::post('login', [SessionController::class, 'store']);
 });
+
+Route::post('posts/{post:slug}/comments', [PostCommentsController::class, 'store'])->middleware('auth');
 
 
 
