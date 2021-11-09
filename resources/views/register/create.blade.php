@@ -8,77 +8,23 @@
             <form action="/register" method="post" class="mt-10">
                 @csrf
 
-                <div class="mb-6">
-                    <label class="block mb-2 text-xs font-bold text-gray-700 uppercase"
-                           for="name">
-                        Name
-                    </label>
-                    <input class="w-full p-2 border border-gray-400 rounded"
-                           type="text"
-                           id="name"
-                           name="name"
-                           value="{{ old('name') }}"
-                           required>
+                <x-form.input name="name"></x-form.input>
+                <x-form.input name="username"></x-form.input>
+                <x-form.input name="email" type="email"></x-form.input>
 
-                    @error('name')
-                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>                        
-                    @enderror
-                </div>
+                <x-form.field>
+                    <x-form.label name="password">Password</x-form.label>
 
-                <div class="mb-6">
-                    <label class="block mb-2 text-xs font-bold text-gray-700 uppercase"
-                           for="username">
-                        Username
-                    </label>
-                    <input class="w-full p-2 border border-gray-400 rounded"
-                           type="text"
-                           id="username"
-                           name="username"
-                           value="{{ old('username') }}"
-                           required>
-                    
-                    @error('username')
-                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>                        
-                    @enderror
-                </div>
-
-                <div class="mb-6">
-                    <label class="block mb-2 text-xs font-bold text-gray-700 uppercase"
-                           for="email">
-                        Email
-                    </label>
-                    <input class="w-full p-2 border border-gray-400 rounded"
-                           type="email"
-                           id="email"
-                           name="email"
-                           value="{{ old('email') }}"
-                           required>
-                    @error('email')
-                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>                        
-                    @enderror
-                </div>
-    
-                <div class="mb-6">
-                    <label class="block mb-2 text-xs font-bold text-gray-700 uppercase"
-                           for="password">
-                        Password
-                    </label>
                     <input class="w-full p-2 border border-gray-400 rounded"
                            type="password"
                            id="password"
                            name="password"
-                           value=""
                            required>
-                    @error('password')
-                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>                        
-                    @enderror
-                </div>
+                    
+                    <x-form.error name="password"></x-form.error>
+                </x-form.field>
                 
-                <div class="mb-6">
-                    <button type="submit" class="bg-blue-400 text-white rounded py-2 px-4 hover:bg-blue-500">
-                        Submit
-                    </button>
-                </div>
+                <x-form.button>Submit</x-form.button>
             </form>
 
             @if ($errors->any())
