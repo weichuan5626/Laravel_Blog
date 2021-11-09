@@ -19,15 +19,20 @@
                 </a>
             </div>
 
+            
+
             <div class="mt-8 md:mt-0 flex items-center">
                 @auth
                     <x-dropdown>
                         <x-slot name="trigger">
                             <button class="text-xs font-bold uppercase">Welcome, {{ auth()->user()->name }}</button>
                         </x-slot>
+                        
+                        @admin
+                            <x-dropdown-item href="/admin/posts" :active="request()->is('admin/posts')">Dashboard</x-dropdown-item>
+                            <x-dropdown-item href="/admin/posts/create" :active="request()->is('admin/posts/create')">Add Post</x-dropdown-item>
+                        @endadmin
 
-                        <x-dropdown-item href="/admin/posts" :active="request()->is('admin/posts')">Dashboard</x-dropdown-item>
-                        <x-dropdown-item href="/admin/posts/create" :active="request()->is('admin/posts/create')">Add Post</x-dropdown-item>
                         <x-dropdown-item href="#" x-data="" @click.prevent="document.querySelector('#logout-form').submit()">Log out</x-dropdown-item>
 
                         <form action="/logout" method="post" class="hidden" id="logout-form">
