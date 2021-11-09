@@ -29,9 +29,12 @@ use Illuminate\Support\Facades\URL;
 
 Route::get('/', [PostController::class, 'index'])->name('home');
 
-Route::get('admin/posts/create', [PostController::class, 'create'])->middleware('admin');
-
 Route::get('posts/{post:slug}', [PostController::class, 'show']);
+
+Route::middleware(['admin'])->group(function () {
+    Route::get('admin/posts/create', [PostController::class, 'create']);
+    Route::post('admin/posts', [PostController::class, 'store']);
+});
 
 Route::middleware(['guest'])->group(function () {
     Route::get('register', [RegisterController::class, 'create']);
