@@ -29,6 +29,8 @@ use Illuminate\Support\Facades\URL;
 
 Route::get('/', [PostController::class, 'index'])->name('home');
 
+Route::get('admin/posts/create', [PostController::class, 'create'])->middleware('admin');
+
 Route::get('posts/{post:slug}', [PostController::class, 'show']);
 
 Route::middleware(['guest'])->group(function () {
@@ -44,8 +46,6 @@ Route::middleware(['guest'])->group(function () {
 Route::post('newsletter', NewsletterController::class);
 
 Route::post('posts/{post:slug}/comments', [PostCommentsController::class, 'store'])->middleware('auth');
-
-
 
 Route::post('logout', [SessionController::class, 'destory']);
 
