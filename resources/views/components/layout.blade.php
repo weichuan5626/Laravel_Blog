@@ -21,13 +21,22 @@
 
             <div class="mt-8 md:mt-0 flex items-center">
                 @auth
-                    <span class="text-xs font-bold uppercase">Welcome, {{ auth()->user()->name }}</span>
+                    <x-dropdown>
+                        <x-slot name="trigger">
+                            <button class="text-xs font-bold uppercase">Welcome, {{ auth()->user()->name }}</button>
+                        </x-slot>
 
-                    <form action="/logout" method="post" class="text-xs font-semibold text-blue-500 ml-6">
-                        @csrf
+                        <x-dropdown-item href="/admin/dashboard">Dashboard</x-dropdown-item>
+                        <x-dropdown-item href="/admin/posts/create" :active="request()->is('admin/posts/create')">Add Post</x-dropdown-item>
+                        <x-dropdown-item href="#" x-data="" @click.prevent="document.querySelector('#logout-form').submit()">Log out</x-dropdown-item>
 
-                        <button type="submit">Log out</button>
-                    </form>                    
+                        <form action="/logout" method="post" class="hidden" id="logout-form">
+                            @csrf
+                        </form>
+                    </x-dropdown>
+
+
+                    
                 @else
                     <a href="/register" class="text-xs font-bold uppercase">Register</a>
                     <a href="/login" class="ml-6 text-xs font-bold uppercase">Log In</a>
@@ -64,12 +73,12 @@
 
                                 @error('email')
                                     <span class="text-xs text-red-500">{{ $message }}</span>
-                                @enderror  
-                            </div>                                                      
+                                @enderror
+                            </div>
                         </div>
 
-                        
-                        
+
+
 
                         <button type="submit"
                                 class="transition-colors duration-300 bg-blue-500 hover:bg-blue-600 mt-4 lg:mt-0 lg:ml-3 rounded-full text-xs font-semibold text-white uppercase py-3 px-8"
@@ -87,7 +96,7 @@
             x-init="setTimeout(()=> show = false, 3000)"
             x-show="show"
             class="bg-blue-500 bottom-3 fixed px-4 py-2 right-3 rounded-xl text-sm text-white">
-            <p>{{ session('success') }}</p>    
+            <p>{{ session('success') }}</p>
         </div>
     @endif
 </body>
